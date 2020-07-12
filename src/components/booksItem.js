@@ -1,17 +1,11 @@
-import React, { useContext } from "react";
+import React from "react";
 import { FaTrash } from "react-icons/fa";
-// import Context from "../stateProvider";
 import { databaseRef } from "../firebase";
 
 function BooksItem(props) {
-  // const [state, dispatch] = useContext(Context);
-
-  // let newArr = [];
   const handleDelete = () => {
-    // state.booksList.map((bookId) => {});
     let id = props.id;
     databaseRef.doc(id).delete();
-    // dispatch({ type: "SET_BOOKS", booksList: newArr });
   };
 
   return (
@@ -28,4 +22,3 @@ function BooksItem(props) {
 }
 
 export default BooksItem;
-//booksRef.doc(doc.id).delete();
