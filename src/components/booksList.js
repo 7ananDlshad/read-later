@@ -7,33 +7,19 @@ export const BooksList = () => {
   const [state, dispatch] = useContext(Context);
 
   useEffect(() => {
-    // databaseRef
-    //   .where("author", "==", "no name")
-    //   // if you wanna just return a some specific data
-    //   .orderBy("title")
-    //   .get()
-    //   .then((bookData) => {
-    //     // console.log(bookData.docs);
-    //     const arr = [];
-    //     bookData.docs.forEach((document) => {
-    //       // console.log(document.data());
-
-    //       arr.push({ ...document.data(), id: document.id });
-    //     });
-
-    databaseRef.onSnapshot((snapshot) => {
-      let changes = snapshot.docChanges();
-      console.log(changes);
-      const arr = [];
-      changes.forEach((change) => {
-        // console.log(change.doc.data());
-        if (change.type === "added") {
-        } else if (change.type === "removed") {
-        }
+    databaseRef
+      // .where("author", "==", "no name")
+      // // if you wanna just return a some specific data
+      // .orderBy("title")
+      .onSnapshot((bookData) => {
+        // console.log(bookData.docs);
+        const arr = [];
+        bookData.docs.forEach((document) => {
+          // console.log(document.data());
+          arr.push({ ...document.data(), id: document.id });
+        });
+        dispatch({ type: "SET_BOOKS", booksList: arr });
       });
-
-      dispatch({ type: "SET_BOOKS", booksList: arr });
-    });
   }, [dispatch]);
 
   return (
